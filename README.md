@@ -1,7 +1,7 @@
 # Graph-Plotter
 The _"graph-plotter.py"_ file helps to plot diverse graphs based on your input values. Currently, the program is supported only on [Unix-based Operating Systems](https://en.wikipedia.org/wiki/Unix-like).<br/>
 The scirpt is being developed to make easier the process of creation of graphs for people, who do not how data visualization is done or programming at all.<br/>
-The program is under development. Contributions are highly appreciated.
+The program is under development. Contributions are highly appreciated in _changes_ branch.
 
 
 ## Requirements
