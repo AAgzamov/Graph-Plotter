@@ -1,5 +1,6 @@
 # IMPORTING NECESSARY MODULES.
 import os
+import datetime
 import matplotlib.pyplot as plt
 
 # DECLARING VARIABLES OF COLORS.
@@ -13,12 +14,19 @@ CYAN = '\033[1;36;40m'
 # FUNCTIONS.
 # function for printing out instructions.
 def manual():
-    print(f'''
-
-    Supported commands:
-        exit() - stop execution and quit the program.
-
-    ''')
+    print('\n')
+    try:
+        with open('./files/manual.file', 'r') as f:
+            for line in f:
+                print(line, end='')
+    except:
+        print('[Error]: Cannot find manual.file!')
+    # print(f'''
+    #
+    # Supported commands:
+    #     exit() - stop execution and quit the program.
+    #
+    # ''')
 
 # function for printing out the creators of a program.
 def credits():
@@ -68,16 +76,23 @@ def derive():
 
 # function for printing out existing stylesheets.
 def menu_2():
-    print(f'''
-
-    Available style sheets:
-        1. classic                  6. fast
-        2. Solarize_Light2          7. fivethirtyeight
-        3. _classic_test_patch      8. ggplot
-        4. bmh                      9. grayscale
-        5. dark_background          10. seaborn
-
-    ''')
+    print('\n')
+    try:
+        with open('./files/stylesheets.file', 'r') as f:
+            for line in f:
+                print(line, end='')
+    except:
+        print('[Error]: Cannot find stylesheets.file!')
+    # print(f'''
+    #
+    # Available style sheets:
+    #     1. classic                  6. fast
+    #     2. Solarize_Light2          7. fivethirtyeight
+    #     3. _classic_test_patch      8. ggplot
+    #     4. bmh                      9. grayscale
+    #     5. dark_background          10. seaborn
+    #
+    # ''')
 
 # clear screen function for Unix-based operating systems.
 def clear():
@@ -124,7 +139,7 @@ def line_graph():
             if size == 'exit()':
                 break
             elif size == '':
-                size = None
+                figsize = None
                 break
             else:
                 size = size.split(', ')
@@ -198,8 +213,11 @@ def line_graph():
     if line_color == 'exit()':
         exit()
     # line style input.
-    line_style = input('Enter the style of a line: ')
+    line_style = input('Enter the line style: ')
     if line_style == 'exit()':
+        exit()
+    marker = input('Enter the line marker: ')
+    if marker == 'exit()':
         exit()
     # 'x' ticks values.
     while 1:
@@ -257,6 +275,8 @@ def line_graph():
         line_color = None
     if line_style == '':
         line_style = 'solid'
+    if marker == '':
+        marker = None
     if len(x_ticks) < 1:
         x_ticks = None
     if len(y_ticks) < 1:
@@ -276,7 +296,7 @@ def line_graph():
     plt.ylabel(y_label)
     plt.xticks(x_ticks)
     plt.yticks(y_ticks)
-    plt.plot(x, y, color = line_color, linestyle = line_style, linewidth = line_width)
+    plt.plot(x, y, color = line_color, linestyle = line_style, marker = marker, linewidth = line_width)
 
 
 
@@ -298,21 +318,16 @@ def line_graph():
             break
         except:
             error_output()
+    date = datetime.datetime.today().strftime('%B %d, %Y')
+    time = datetime.datetime.today().strftime('%H:%M')
+    with open('history.txt', 'a') as f:
+        f.write('\n')
+        f.write(f'Created "{graph_name}" on {date} at {time}.')
+        f.write('\n')
     if name == 'exit()':
         exit()
     if dpi == 'exit()':
         exit()
-
-
-    # print('Do you want to save it as a file? [y/n]')
-    # user = input().lower()
-    # if user == 'y': # if user wants to save a line graph.
-    #     name = input('Enter the name of a file with an extension: ')
-    #     dpi = int(input('Define quality in \'DPI\': '))
-    #     plt.savefig(f'{name}', dpi = dpi)
-    #     print(f'A line graph is saved as {name} in the same directory with the program.')
-    # elif user == 'n':
-    #     pass
 
     print(f'\n[Info]: Plotting process is complete!\n')
     print(f'...Press any key to go back to the main menu...')
