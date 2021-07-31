@@ -7,7 +7,7 @@ The program is under development. Contributions are highly appreciated.
 ## Requirements
 1. Unix-based OS (e.g. Linux, MacOS).
 2. pyhton3 or higher.
-3. [```matplotlib```](matplotlib.org) python library.
+3. [```matplotlib```](https://www.matplotlib.org) python library.
 
 ## Instruction
 1. Copy the repository to your local machine: ```git clone https://github.com/AAgzamov/Graph-Plotter.git```.
