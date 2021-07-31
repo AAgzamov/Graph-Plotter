@@ -7,11 +7,11 @@ The program is under development. Contributions are highly appreciated in _chang
 ## Requirements
 1. Unix-based OS (e.g. Linux, MacOS).
 2. pyhton3 or higher.
-3. [```matplotlib```](matplotlib.org) python library.
+3. [```matplotlib```](https://www.matplotlib.org) python library.
 
 ## Instruction
 1. Copy the repository to your local machine: ```git clone https://github.com/AAgzamov/Graph-Plotter.git```.
-2. If you do not have Python installed, do it [here](python.org).
+2. If you do not have Python installed, do it [here](https://www.python.org).
 3. Install required libraries: ```pip3 install -r requirements.txt```.
 4. If _"fuctions.py"_ and _"graph-plotter.py"_ are not executable, run: ```chmod +x functions.py graph-plotter.py```.
 5. Run _"graph-plotter.py"_: ```python3 graph-plotter.py```.
