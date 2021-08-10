@@ -209,7 +209,7 @@ def line_graph():
     if line_width == 'exit()':
         exit()
     # color input.
-    line_color = input('Enter the color of a line (color name or in HEX format): ')
+    line_color = input('Enter the color of a line (color name or HEX format): ')
     if line_color == 'exit()':
         exit()
     # line style input.
@@ -335,7 +335,192 @@ def line_graph():
 
 # function for plotting a bar chart.
 def bar_chart():
-    pass
+    print('[Info]: Inputs marked by an asterisk are compulsory. Others are optional. Press Enter to skip optional inputs\nor type exit() to stop execution.\n')
+    # title input.
+    graph_name = input('How to do you want to name your line graph? ')
+    if graph_name == 'exit()':
+        exit()
+    # 'x' label input.
+    x_label = input('Label X-axis: ')
+    if x_label == 'exit()':
+        exit()
+    # 'y' label input.
+    y_label = input('Label Y-axis: ')
+    if y_label == 'exit()':
+        exit()
+    while 1:
+        try:
+            size = input('Enter the size of a figure (width and height separated by comma): ')
+            if size == 'exit()':
+                break
+            elif size == '':
+                figsize = None
+                break
+            else:
+                size = size.split(', ')
+                figsize = [int(n) for n in size]
+                figsize = tuple(figsize) # converting list 'figsize' to a tuple.
+                break
+        except:
+            error_output()
+    if size == 'exit()':
+        exit()
+    # stylesheet input.
+    stylesheet = input('Enter the name of a stylesheet: ')
+    if stylesheet == 'exit()':
+        exit()
+    # labels and values input.
+    labels = list()
+    values = list()
+    print(f'Enter names of the bars and their corresponding numeric value separated by comma. If done, press Enter.')
+    while 1:
+        user = input(f': ')
+        if user == '':
+            break
+        elif user == 'exit()':
+            break
+        else:
+            user = user.split(', ')
+            labels.append(user[0])
+            values.append(int(user[1]))
+    if user == 'exit()':
+        exit()
+    # bar width input.
+    while 1:
+        try:
+            bar_width = input('Enter the width of bars (a single number): ')
+            if bar_width == 'exit()':
+                break
+            elif bar_width == '':
+                bar_width = None
+            else:
+                bar_width = float(bar_width)
+            break
+        except:
+            error_output()
+    if bar_width == 'exit()':
+        exit()
+
+    # edge width input.
+    while 1:
+        try:
+            edge_width = input(f'Enter the width of bar edges (a single number): ')
+            if edge_width == 'exit()':
+                break
+            elif edge_width == '':
+                edge_width = 0
+            else:
+                edge_width = float(edge_width)
+            break
+        except:
+            error_output()
+    if edge_width == 'exit()':
+        exit()
+
+    # colors input.
+    colors = list()
+    print(f'Enter colors of bars (color name or HEX format).')
+    for i in range(len(labels)):
+        try:
+            user = input(f'"{labels[i]}" bar color: ')
+            if user == '':
+                break
+            elif user == 'exit()':
+                break
+            else:
+                colors.append(user)
+        except:
+            error_output()
+
+    if user == 'exit()':
+        exit()
+    if len(colors) == 0:
+        del colors
+        colors = blue
+    elif len(colors) != 0:
+        for i in range(len(colors)):
+            if i == 0:
+                continue
+            elif i != 0:
+                if colors[i]=='':
+                    colors.insert(i, 'blue')
+
+    # edge color input.
+    if edge_width != 0:
+        edge_colors = list()
+        print(f'Enter edge colors of bars (color name or HEX format).')
+        for i in range(len(labels)):
+            try:
+                user = input(f'"{labels[i]}" bar edge color: ')
+                if user == '':
+                    break
+                elif user == 'exit()':
+                    break
+                else:
+                    edge_colors.append(user)
+            except:
+                error_output()
+
+        if user == 'exit()':
+            exit()
+        if len(edge_colors) == 0:
+            del edge_colors
+            edge_colors = None
+        elif len(edge_colors) !=0:
+            for i in range(len(edge_colors)):
+                if i!=0:
+                    if edge_colors[i] == '':
+                        edge_colors.insert(i, 'black')
+
+
+    # checking if some values should have default value.
+
+
+    # plotting a bar chart.
+    try:
+        plt.style.use(stylesheet)
+    except:
+        print(f'[Warning]: Cannot define a style sheet! Instead using default stylesheet!')
+    plt.figure(figsize = figsize)
+    plt.title(graph_name)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    #plt.xticks(x_ticks)
+    #plt.yticks(y_ticks)
+    plt.bar(labels, values, color=colors, edgecolor=edge_colors, width=bar_width, linewidth=edge_width)
+
+
+    print('[Info]: Done! A bar chart is plotted.')
+    print('\n[Info]: Need to save a bar chart as a file.\n')
+    while 1:
+        try:
+            name = input('Enter the name of a file with an extension: ')
+            if name == 'exit()':
+                break
+            dpi = int(input('Define quality in \'DPI\': '))
+            if dpi == 'exit()':
+                break
+            else:
+                dpi = int(dpi)
+            plt.savefig(f'{name}', dpi = dpi)
+            print(f'\n[Info]: A bar chart is saved as {name} in the same directory with the program.\n')
+            break
+        except:
+            error_output()
+    date = datetime.datetime.today().strftime('%B %d, %Y')
+    time = datetime.datetime.today().strftime('%H:%M')
+    with open('history.txt', 'a') as f:
+        f.write('\n')
+        f.write(f'Created "{graph_name}" on {date} at {time}.')
+        f.write('\n')
+    if name == 'exit()':
+        exit()
+    if dpi == 'exit()':
+        exit()
+
+    print(f'\n[Info]: Plotting process is complete!\n')
+    print(f'...Press any key to go back to the main menu...')
+    input()
 
 # function for plotting a pie chart.
 def pie_chart():
