@@ -1,0 +1,25 @@
+Supported Commands:
+  exit() -- stop execution and quit the program.
+
+Supported Color Names:
+  'b' -- blue
+  'g' -- green
+  'r' -- red
+  'c' -- cyan
+  'm' -- magenta
+  'y' -- yellow
+  'k' -- black
+  'w' -- white
+
+Supported Line Styles:
+  '-' -- solid line style.
+  '--' -- dashed line style.
+  '-.' -- dash-dot line style.
+  ':' -- dotted line style.
+
+Supported Markers:
+  '.' -- point maker.
+  ',' -- pixel maker.
+  'o' -- circle maker.
+  'v' -- triangle_down maker.
+  '^' -- triangle_up maker.

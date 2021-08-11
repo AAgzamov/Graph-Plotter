@@ -27,7 +27,9 @@ while 1:
                 f.line_graph()
                 f.clear()
             elif user == '2':
-                pass
+                f.clear()
+                f.bar_chart()
+                f.clear()
             elif user == '3':
                 pass
         elif user == '2':
