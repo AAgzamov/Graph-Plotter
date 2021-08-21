@@ -112,7 +112,8 @@ def types_of_graphs():
 
     [1] Line graph.
     [2] Bar chart.
-    [3] Pie chart.
+    [3] Horizontal bar chart.
+    [4] Pie chart.
 
     ''')
 
@@ -165,10 +166,9 @@ def line_graph():
     if dimension == 'exit()':
         exit()
     # X and Y coordinates input.
+    print(f'Enter the intersection coordinates of X-axis and Y-axis accordingly (two numbers separated by comma).')   
     while 1:
-
         try:
-            print(f'Enter the intersection coordinates of X-axis and Y-axis accordingly (two numbers separated by comma).')
             # creating lists for keeping 'X' and 'Y' values.
             x = list()
             y = list()
@@ -184,10 +184,12 @@ def line_graph():
                 x.append(x_coordinate)
                 y.append(y_coordinate)
             if user == 'exit()':
-                exit()
+                break
             break
         except:
             error_output()
+    if user == 'exit()':
+        exit()
     # stylesheet input.
     stylesheet = input('Enter the name of a stylesheet: ')
     if stylesheet == 'exit()':
@@ -301,7 +303,7 @@ def line_graph():
 
 
 
-    print('[Info]: Done! A line graph is plotted.')
+    print('\n[Info]: Done! A line graph is plotted.')
     print('\n[Info]: Need to save a line graph as a file.\n')
     while 1:
         try:
@@ -337,7 +339,7 @@ def line_graph():
 def bar_chart():
     print('[Info]: Inputs marked by an asterisk are compulsory. Others are optional. Press Enter to skip optional inputs\nor type exit() to stop execution.\n')
     # title input.
-    graph_name = input('How to do you want to name your line graph? ')
+    graph_name = input('How to do you want to name your bar chart? ')
     if graph_name == 'exit()':
         exit()
     # 'x' label input.
@@ -369,13 +371,18 @@ def bar_chart():
     stylesheet = input('Enter the name of a stylesheet: ')
     if stylesheet == 'exit()':
         exit()
+    elif stylesheet == '':
+        stylesheet = 'default'
     # labels and values input.
     labels = list()
     values = list()
     print(f'Enter names of the bars and their corresponding numeric value separated by comma. If done, press Enter.')
     while 1:
-        user = input(f': ')
+        user = input(f':* ')
         if user == '':
+            if len(labels) == 0:
+                error_output()
+                continue
             break
         elif user == 'exit()':
             break
@@ -392,7 +399,7 @@ def bar_chart():
             if bar_width == 'exit()':
                 break
             elif bar_width == '':
-                bar_width = None
+                bar_width = 0.8
             else:
                 bar_width = float(bar_width)
             break
@@ -424,7 +431,7 @@ def bar_chart():
         try:
             user = input(f'"{labels[i]}" bar color: ')
             if user == '':
-                break
+                colors.append('blue')
             elif user == 'exit()':
                 break
             else:
@@ -434,47 +441,33 @@ def bar_chart():
 
     if user == 'exit()':
         exit()
-    if len(colors) == 0:
-        del colors
-        colors = blue
-    elif len(colors) != 0:
-        for i in range(len(colors)):
-            if i == 0:
-                continue
-            elif i != 0:
-                if colors[i]=='':
-                    colors.insert(i, 'blue')
 
     # edge color input.
+    edge_colors = list()
     if edge_width != 0:
-        edge_colors = list()
         print(f'Enter edge colors of bars (color name or HEX format).')
         for i in range(len(labels)):
             try:
                 user = input(f'"{labels[i]}" bar edge color: ')
                 if user == '':
-                    break
+                    edge_colors.append('black')
                 elif user == 'exit()':
                     break
                 else:
                     edge_colors.append(user)
             except:
                 error_output()
-
         if user == 'exit()':
             exit()
-        if len(edge_colors) == 0:
-            del edge_colors
-            edge_colors = None
-        elif len(edge_colors) !=0:
-            for i in range(len(edge_colors)):
-                if i!=0:
-                    if edge_colors[i] == '':
-                        edge_colors.insert(i, 'black')
+
+    elif edge_width == 0:
+        for i in range(len(labels)):
+            edge_colors.append('black')
+
 
 
     # checking if some values should have default value.
-
+    # N/A
 
     # plotting a bar chart.
     try:
@@ -490,7 +483,7 @@ def bar_chart():
     plt.bar(labels, values, color=colors, edgecolor=edge_colors, width=bar_width, linewidth=edge_width)
 
 
-    print('[Info]: Done! A bar chart is plotted.')
+    print('\n[Info]: Done! A bar chart is plotted.')
     print('\n[Info]: Need to save a bar chart as a file.\n')
     while 1:
         try:
@@ -521,6 +514,17 @@ def bar_chart():
     print(f'\n[Info]: Plotting process is complete!\n')
     print(f'...Press any key to go back to the main menu...')
     input()
+
+
+# function for plotting a horizontal bar chart.
+def horizontal_bar_chart():
+    print('[Info]: Inputs marked by an asterisk are compulsory. Others are optional. Press Enter to skip optional inputs\nor type exit() to stop execution.\n')
+    # title input.
+    graph_name = input('How to do you want to name your horizontal bar chart? ')
+    if graph_name == 'exit()':
+        exit()   
+    pass
+
 
 # function for plotting a pie chart.
 def pie_chart():
