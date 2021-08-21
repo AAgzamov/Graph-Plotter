@@ -31,7 +31,14 @@ while 1:
                 f.bar_chart()
                 f.clear()
             elif user == '3':
+                f.clear()
+                f.horizontal_bar_chart()
+                f.clear()
                 pass
+            elif user == '4':
+                f.clear()
+                f.pie_chart()
+                f.clear
         elif user == '2':
             f.clear()
             f.derive()
